@@ -1,20 +1,20 @@
 # <img src="https://user-images.githubusercontent.com/918212/56085390-af18c780-5e42-11e9-9ae7-7ba453502ddb.png" width="300">
 
-*GoXel - download accelerator written in Go*
+GoXel is a download accelerator written in Golang, which inspired
+by [axel](https://github.com/axel-download-accelerator/axel).
 
-GoXel is a Go package for faster downloads from the internet:
+## Features
 
-* Monitor download progress
-* Resume incomplete downloads
-* Guess filename from URL path
-* Download batches of files concurrently
-
-GoXel was inspired by axel (https://github.com/axel-download-accelerator/axel)
+- Unlimited multithreading downloads
+- Download multiple files concurrently
+- Resume unfinished downloads
+- Monitor download progress
+- Guess filename from URL path
 
 ## Installation
 
 ```shell
-go install github.com/chengxuncc/goxel
+go install github.com/chengxuncc/goxel/cmd/goxel@latest
 ```
 
 ## Usage
@@ -49,7 +49,6 @@ This benchmark compares Axel and GoXel for multiple downloads using files from h
 All links were done using a broadhand connection: 455.0 Mbit/s download, 276.4 Mbit/s upload, lantency 3ms over WiFi.
 
 ![Benchmark](https://user-images.githubusercontent.com/918212/56504862-2e308e80-651a-11e9-96de-398bf263b060.png)
-
 
 ## Contributing
 

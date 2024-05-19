@@ -29,7 +29,6 @@ const (
 // - GOXEL_ALLDEBRID_USERNAME
 // - GOXEL_ALLDEBRID_PASSWD
 type GoXel struct {
-	AlldebridLogin, AlldebridPassword                                 string
 	IgnoreSSLVerification, OverwriteOutputFile, Quiet, Scroll, Resume bool
 	OutputDirectory, InputFile, Proxy                                 string
 	MaxConnections, MaxConnectionsPerFile, BufferSize                 int
@@ -56,9 +55,6 @@ func NewGoXel() *GoXel {
 	flag.BoolVarP(&goxel.Scroll, "scroll", "s", false, "Scroll output instead of in place display")
 
 	noresume := flag.Bool("no-resume", false, "Don't resume downloads")
-
-	flag.StringVar(&goxel.AlldebridLogin, "alldebrid-username", "", "Alldebrid username, can also be passed in the GOXEL_ALLDEBRID_USERNAME environment variable")
-	flag.StringVar(&goxel.AlldebridPassword, "alldebrid-password", "", "Alldebrid password, can also be passed in the GOXEL_ALLDEBRID_PASSWD environment variable")
 
 	versionFlag := flag.Bool("version", false, "Version")
 
@@ -118,17 +114,6 @@ func (g *GoXel) Run() {
 	g.MaxConnections = int(math.Min(float64(g.MaxConnections), float64(g.MaxConnectionsPerFile*len(urls))))
 
 	urlPreprocessors := []URLPreprocessor{&StandardURLPreprocessor{}}
-	if g.AlldebridLogin != "" && g.AlldebridPassword != "" || os.Getenv("GOXEL_ALLDEBRID_USERNAME") != "" && os.Getenv("GOXEL_ALLDEBRID_PASSWD") != "" {
-		var login, password string
-		if g.AlldebridLogin != "" {
-			login = g.AlldebridLogin
-			password = g.AlldebridPassword
-		} else {
-			login = os.Getenv("GOXEL_ALLDEBRID_USERNAME")
-			password = os.Getenv("GOXEL_ALLDEBRID_PASSWD")
-		}
-		urlPreprocessors = append(urlPreprocessors, &AllDebridURLPreprocessor{Login: login, Password: password})
-	}
 
 	for _, up := range urlPreprocessors {
 		urls = up.process(urls)

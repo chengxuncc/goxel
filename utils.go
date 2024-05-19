@@ -3,35 +3,26 @@ package goxel
 import (
 	"errors"
 	"fmt"
+	"golang.org/x/net/proxy"
+	"golang.org/x/term"
 	"net/http"
 	"net/url"
 	"regexp"
 	"strings"
 	"sync"
-	"syscall"
-	"unsafe"
-
-	"golang.org/x/net/proxy"
 )
 
-type winsize struct {
-	Row    uint16
-	Col    uint16
-	Xpixel uint16
-	Ypixel uint16
-}
+const defaultWidth = 128
 
-func getWidth() uint {
-	ws := &winsize{}
-	retCode, _, _ := syscall.Syscall(syscall.SYS_IOCTL,
-		uintptr(syscall.Stdin),
-		uintptr(syscall.TIOCGWINSZ),
-		uintptr(unsafe.Pointer(ws)))
-
-	if int(retCode) == -1 {
-		return uint(100)
+func getWidth() int {
+	if !term.IsTerminal(0) {
+		return defaultWidth
 	}
-	return uint(ws.Col)
+	width, _, err := term.GetSize(0)
+	if err != nil {
+		return defaultWidth
+	}
+	return width
 }
 
 func fmtDuration(d uint64) string {

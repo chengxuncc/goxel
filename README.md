@@ -1,9 +1,5 @@
 # <img src="https://user-images.githubusercontent.com/918212/56085390-af18c780-5e42-11e9-9ae7-7ba453502ddb.png" width="300">
 
-
-[![GoDoc](https://godoc.org/github.com/m1ck43l/goxel?status.svg)](https://godoc.org/github.com/m1ck43l/goxel) [![Build Status](https://travis-ci.org/m1ck43l/goxel.svg?branch=master)](https://travis-ci.org/m1ck43l/goxel/builds) [![Go Report Card](https://goreportcard.com/badge/github.com/m1ck43l/goxel)](https://goreportcard.com/report/github.com/m1ck43l/goxel) [![Coverage Status](https://coveralls.io/repos/github/m1ck43l/goxel/badge.svg?branch=master&_=0.11)](https://coveralls.io/github/m1ck43l/goxel?branch=master)
-
-
 *GoXel - download accelerator written in Go*
 
 GoXel is a Go package for faster downloads from the internet:
@@ -13,17 +9,13 @@ GoXel is a Go package for faster downloads from the internet:
 * Guess filename from URL path
 * Download batches of files concurrently
 
-Requires Go v1.11+
-
 GoXel was inspired by axel (https://github.com/axel-download-accelerator/axel)
 
-## Build
+## Installation
 
+```shell
+go install github.com/chengxuncc/goxel
 ```
-$ make clean && make deps && make && make test
-```
-
-Make will create the goxel executable in the bin directory
 
 ## Usage
 
@@ -66,3 +58,7 @@ Pull requests for new features, bug fixes, and suggestions are welcome!
 ## License
 
 [Apache 2](https://github.com/m1ck43l/goxel/blob/master/LICENSE)
+
+## Credits
+
+[m1ck43l/goxel](https://github.com/m1ck43l/goxel)
